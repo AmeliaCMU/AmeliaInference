@@ -1,0 +1,18 @@
+# Data path config
+airport: 'ksea'
+
+# Paths
+scene_file: ['KSEA_3_1690768800','KSEA_4_1690772400','KSEA_1_1690761600','KSEA_365_1692108000','KSEA_5_1690776000','KSEA_357_1692064800','KSEA_7_1690783200','KSEA_471_1692514800','KSEA_367_1692115200','KSEA_473_1692522000'] 
+weights_path: '/scratch/portegak/ego_agent_checkpoints/ksea/ksea_critical/checkpoints/epoch_019.ckpt'
+model_config_path : "configs/model/amelia_marginal.yaml"
+visualization_tag: 'critical_ego'  
+
+# Model/Data settings
+sampling_type: critical
+use_map : True
+
+# Testing options
+plot: True
+max_scenes: 20
+from_pickle: False
+report_inference_time: False

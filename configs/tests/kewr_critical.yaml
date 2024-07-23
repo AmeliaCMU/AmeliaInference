@@ -1,0 +1,19 @@
+# Data path config
+airport: 'kewr'
+
+# Paths
+#scene_file: ['KEWR_364_1678849200','KEWR_285_1678564800','KEWR_369_1678888800','KEWR_195_1678240800','KEWR_210_1678294800','KEWR_372_1678899600','KEWR_269_1678507200','KEWR_175_1678168800','KEWR_172_1678158000','KEWR_502_1679367600']
+scene_file: ['KEWR_172_1678158000', 'KEWR_502_1679367600']
+weights_path: '/scratch/portegak/ego_agent_checkpoints/kewr/kewr_critical/checkpoints/epoch_042.ckpt'
+model_config_path : "configs/model/amelia_marginal.yaml"
+visualization_tag: 'critical_ego'  
+
+# Model/Data settings
+sampling_type: critical
+use_map : True
+
+# Testing options
+plot: True
+max_scenes: 20
+from_pickle: False
+report_inference_time: False
