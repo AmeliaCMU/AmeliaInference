@@ -1,10 +1,10 @@
-config:   
+config:
   in_data_dir: "datasets/amelia/traj_data_a10v08/raw_trajectories"
   out_data_dir: "datasets/amelia/traj_data_a10v08/proc_trajectories"
   context_dir: "datasets/amelia/graph_data_a10v01os"
   assets_dir: "datasets/amelia/assets"
-  
-  split: test
+
+  split: null
 
   traj_len: 60
   hist_len: 10
@@ -19,13 +19,16 @@ config:
 
   encode_agent_type: false
   encode_interp_flag: false
-  
+
   parallel: true
   debug: false
   do_sharding: true
 
-  sampling_strategy: random
+  sampling_strategy: critical
+  supported_sampling_strategies: [random, critical]
   k_agents: 5
+
+  seed: 42
 
 extra_params:
   batch_size: 128
@@ -42,7 +45,7 @@ extra_params:
 
     to_process: 1.0
     seed: 42
-  
+
     split_type: day
     day_splits:
       train_val: [0.8, 0.2]
