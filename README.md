@@ -32,7 +32,7 @@ conda activate amelia
 Run the testing script:
 
 ```bash
-python test_bed.py -m test=[test_name]
+python run_inference.py -m test=[test_name]
 ```
 
 Where `[test_name]` is the name of the test to run. The tests files are in a `yaml` format and are located in the `configs/test` directory. The default test is `default.yaml`. The test files contain the configuration for the test, including the model, the dataloader, the dataset, the device, the seed, and the output directory.
@@ -40,7 +40,7 @@ Where `[test_name]` is the name of the test to run. The tests files are in a `ya
 For some quick changes you may refer to hydras' [documentation](https://hydra.cc/docs/tutorials/basic/running_your_app/multi-run/). The next example shows how to change the test file to `example_kbos_critical.yaml`, which is a test file that uses the KBOS dataset and the critical model and it is included in th erepository as an example.
 
 ```bash
-python test_bed.py -m test=example_kbos_critical
+python run_inference.py -m test=example_kbos_critical
 ```
 
 Giving the following output in the `output` directory:
