@@ -3,9 +3,9 @@ out
 out/
 output
 
-configs/tests
-!configs/tests/default.yaml
+configs/tests/
 !configs/tests/example.yaml
+!configs/tests/default.yaml
 
 
 # dataset dir
