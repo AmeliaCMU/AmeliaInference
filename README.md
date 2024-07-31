@@ -19,7 +19,7 @@ ln -s /path/to/the/amelia/dataset .
 
 ### Installation
 
-This repository requires the AmeliaTF, it can be installed following the instructions [here](https://github.com/AmeliaCMU/AmeliaTF/INSTALL.md). Once installed, in the same e the. However, you can do so following the instructions [here](https://github.com/AmeliaCMU/AmeliaScenes/INSTALL.md)
+This repository requires the AmeliaTF, it can be installed following the instructions [here](https://github.com/AmeliaCMU/AmeliaTF/INSTALL.md). Once installed, in the same environment follow the instructons in [INSTALL.md](https://github.com/AmeliaCMU/AmeliaInference/INSTALL.md). However, you can intall the Amelia Framework following the instructions [here](https://github.com/AmeliaCMU/AmeliaScenes/INSTALL.md).
 
 ## How to use
 
