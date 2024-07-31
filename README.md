@@ -2,7 +2,7 @@
 
 ## Overview
 
-AmeliaInference is a repository that contains the code to run the inference of the Amelia Framework. This repository is part of the Amelia Framework, a framework to generate and evaluate synthetic data for the task of object detection in indoor scenes.
+AmeliaInference is a repository that contains the code to run the Amelia Framework. It is a framework that allows to run tests on the amelia dataset based on th hydra library, allowing to run tests with different configurations and dataloaders.
 
 ## Pre-requisites
 
@@ -10,7 +10,7 @@ AmeliaInference is a repository that contains the code to run the inference of t
 
 To run this repository, you first need to download the amelia dataset. Follow the instructions [here](https://github.com/AmeliaCMU/AmeliaScenes/DATASET.md) to download and setup the dataset.
 
-Once downloaded, create a symbolic link into  ```datasets```:
+Once downloaded, create a symbolic link into  `datasets`:
 
 ```bash
 cd datasets
@@ -19,7 +19,7 @@ ln -s /path/to/the/amelia/dataset .
 
 ### Installation
 
-<!-- This repository requires the Amelia Framework, it can be installed following the instructions [here](https://github.com/AmeliaCMU/AmeliaInference/INSTALL.md). However, you can do so following the instructions [here](https://github.com/AmeliaCMU/AmeliaScenes/INSTALL.md) -->
+This repository requires the AmeliaTF, it can be installed following the instructions [here](https://github.com/AmeliaCMU/AmeliaTF/INSTALL.md). Once installed, in the same e the. However, you can do so following the instructions [here](https://github.com/AmeliaCMU/AmeliaScenes/INSTALL.md)
 
 ## How to use
 
@@ -32,26 +32,24 @@ conda activate amelia
 Run the testing script:
 
 ```bash
-python test_bed.py --in_file [in_file]
+python test_bed.py -m test=[test_name]
 ```
 
-Where `[in_file]` is the path to the test `yaml` file. By default it is set to `default` wich is `configs/test/default.yaml` the. It can be changed to any other file in the `configs/test` directory to run diferent tests.
+Where `[test_name]` is the name of the test to run. The tests files are in a `yaml` format and are located in the `configs/test` directory. The default test is `default.yaml`. The test files contain the configuration for the test, including the model, the dataloader, the dataset, the device, the seed, and the output directory.
 
-For some quick changes it can also be set directly in the command line with the following options.
+For some quick changes you may refer to hydras' [documentation](https://hydra.cc/docs/tutorials/basic/running_your_app/multi-run/). The next example shows how to change the test file to `example_kbos_critical.yaml`, which is a test file that uses the KBOS dataset and the critical model and it is included in th erepository as an example.
 
 ```bash
-python test_bed.py --in_file [in_file] --out_dir [out_dir] --dataset_dir [dataset_dir]--dataloader [dataloader] --device [device] --seed [seed]
+python test_bed.py -m test=example_kbos_critical
 ```
 
-Where:
+Giving the following output in the `output` directory:
 
-- `[out_dir]`: The output directory where the results will be saved. By default it is set to `out`.
-- `[dataset_dir]`: The directory where the dataset is located. By default it is set to `datasets/amelia`.
-- `[dataloader]`: The dataloader to use. By default it is set to `default`.
+```bash
+
+``
 
 
-Other optional arguments are:
--
 
 
 ## BibTeX
