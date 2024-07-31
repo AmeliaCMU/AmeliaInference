@@ -107,36 +107,6 @@ def main(cfg: DictConfig) -> None:
                 out_dir=out_dir
             )
 
-    # testset = [cfg.tests.scene_file]
-
-    # for test_file in testset:
-    #     print(f"----- Loading scenes for {test_file} -----")
-    #     vis_tag = f"{test_file}_{cfg.tests.tag}"
-    #     out_dir = os.path.join(cfg.tests.out_data_dir, f"{test_file}_{cfg.tests.tag}")
-    #     if not os.path.exists(out_dir):
-    #         os.makedirs(out_dir)
-
-    #     scene_file_list, scenes = get_scene_list(test_file, cfg.tests.airport,
-    #                                              traj_dir=TRAJ_DATA_DIR,
-    #                                              max_scenes=cfg.tests.max_scenes,
-    #                                              sorted=False)
-
-    #     print("----- Forwarding scenes -----")
-    #     for scene in tqdm(scenes):
-    #         batch, predictions = predictor.forward(scene)
-    #         if plot:
-    #             full_scene, preds = get_full_scene_batch(batch, scene, predictions)
-    #             plot_scene_batch(
-    #                 asset_dir=cfg.data.config.assets_dir,
-    #                 batch=full_scene,
-    #                 predictions=preds,
-    #                 hist_len=model.hist_len,
-    #                 geodesic=Geodesic.WGS84,
-    #                 tag=vis_tag,
-    #                 plot_full_scene=True,
-    #                 out_dir=out_dir
-    #             )
-
 
 if __name__ == '__main__':
     main()
