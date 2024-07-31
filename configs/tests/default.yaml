@@ -1,0 +1,22 @@
+
+# seed for random number generators in pytorch, numpy and python.random
+seed: 42
+# Data path config
+task: ${tests.airport}
+tag: ${tests.sampling_type}_ego
+out_data_dir: ./output
+
+
+airport: ??
+scene_file: ??
+ckpt_path: ??
+# Model/Data settings
+sampling_type: ??
+
+use_map : ??
+
+# Testing options
+plot: ??
+max_scenes: ??
+from_pickle: ??
+report_inference_time: ??
