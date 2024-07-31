@@ -1,6 +1,12 @@
 # Custom dirs
 out
 out/
+output
+
+configs/tests
+!configs/tests/default.yaml
+!configs/tests/example.yaml
+
 
 # dataset dir
 datasets

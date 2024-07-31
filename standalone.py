@@ -24,7 +24,7 @@ class SocialTrajPred():
                  use_map: bool = True, device: str = 'cpu'):
 
         # Create output directory
-        self.AIRPORT = airport
+        self.airport = airport
 
         # Load model and dataloaders
         self.model = model
@@ -36,8 +36,6 @@ class SocialTrajPred():
                                linewidth=None, profile=None, sci_mode=False)
 
         self.device = torch.device(device)
-        # torch.cuda.set_device(0)
-        # self.model.cuda()
         self.model.to(device)
 
     def load_assets(self):
@@ -50,23 +48,25 @@ class SocialTrajPred():
         self.dataloader.scenario_list = {}
         self.dataloader.hold_lines = {}
         self.dataloader.data_files = []
+        print(os.path.exists(self.dataloader.context_dir), self.dataloader.context_dir, os.getcwd())
 
-        graph_file = os.path.join(self.dataloader.context_dir, self.AIRPORT, 'semantic_graph.pkl')
+        graph_file = os.path.join(self.dataloader.context_dir, self.airport, 'semantic_graph.pkl')
         with open(graph_file, 'rb') as f:
             temp_dict = pickle.load(f)
-            self.dataloader.semantic_pkl[self.AIRPORT] = temp_dict
-            self.dataloader.semantic_maps[self.AIRPORT] = temp_dict['map_infos']['all_polylines'][:, G.MAP_IDX]
-            self.dataloader.hold_lines[self.AIRPORT] = temp_dict['hold_lines']
+            self.dataloader.semantic_pkl[self.airport] = temp_dict
+            self.dataloader.semantic_maps[self.airport] = temp_dict['map_infos']['all_polylines'][:, G.MAP_IDX]
+            self.dataloader.hold_lines[self.airport] = temp_dict['hold_lines']
 
-        limits_file = os.path.join(self.dataloader.assets_dir, self.AIRPORT, 'limits.json')
+        limits_file = os.path.join(self.dataloader.assets_dir, self.airport, 'limits.json')
         with open(limits_file, 'r') as fp:
-            self.dataloader.ref_data[self.AIRPORT] = EasyDict(json.load(fp))
+            self.dataloader.ref_data[self.airport] = EasyDict(json.load(fp))
 
-        self.dataloader.limits[self.AIRPORT] = (
-            self.dataloader.ref_data[self.AIRPORT].espg_4326.north,
-            self.dataloader.ref_data[self.AIRPORT].espg_4326.east,
-            self.dataloader.ref_data[self.AIRPORT].espg_4326.south,
-            self.dataloader.ref_data[self.AIRPORT].espg_4326.west
+        self.dataloader.limits[self.airport] = (
+            self.dataloader.ref_data[self.airport].espg_4326.north,
+            self.dataloader.ref_data[self.airport].espg_4326.east,
+            self.dataloader.ref_data[self.airport].espg_4326.south,
+            self.dataloader.ref_data[self.airport].espg_4326.west
+
         )
 
     def dict_to_tensor(self, dict):

@@ -1,19 +1,22 @@
+
+# seed for random number generators in pytorch, numpy and python.random
+seed: 42
 # Data path config
-airport: 'kbos'
+task: ${tests.airport}
+out_data_dir: ./output
 
-# Paths
 
-scene_file: ['KBOS_23_1672610400']
-weights_path: 'datasets/amelia/checkpoints/Single-Airport/kbos_/kbos_critical.ckpt'
-model_config_path : "configs/model/amelia_marginal.yaml"
-visualization_tag: 'critical_ego'
-
+airport: ??
+scene_file: ??
+ckpt_path: ??
+tag: ??
 # Model/Data settings
-sampling_type: critical
-use_map : True
+sampling_type: ??
+
+use_map : ??
 
 # Testing options
-plot: True
-max_scenes: 20
-from_pickle: False
-report_inference_time: False
+plot: ??
+max_scenes: ??
+from_pickle: ??
+report_inference_time: ??

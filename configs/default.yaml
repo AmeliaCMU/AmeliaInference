@@ -1,0 +1,52 @@
+defaults:
+  - data: default.yaml
+  - model: amelia_marginal.yaml
+  - paths: default.yaml
+  - tests: default.yaml
+  - hydra: default.yaml
+  - _self_
+
+
+paths:
+  out_data_dir: ./output
+
+model:
+  config:
+    encoder:
+      hist_len: ${data.config.hist_len}
+      pred_lens: ${data.config.pred_lens}
+      T_size: ${data.config.traj_len}
+      A_size: ${data.config.k_agents}
+      interp_flag: ${data.config.encode_interp_flag}
+      type: contextnet_${model.config.encoder.context_encoder_type}
+      contextnet:
+        embed_size: ${model.config.encoder.embed_size}
+        num_vectors: ${data.config.num_polylines}
+      contextnet_v0:
+        num_vectors: ${data.config.num_polylines}
+        embed_size: ${model.config.encoder.embed_size}
+      contextnet_v1:
+        num_vectors: ${data.config.num_polylines}
+        embed_size: ${model.config.encoder.embed_size}
+      contextnet_v2:
+        num_vectors: ${data.config.num_polylines}
+        embed_size: ${model.config.encoder.embed_size}
+      contextnet_v3:
+        num_vectors: ${data.config.num_polylines}
+        embed_size: ${model.config.encoder.embed_size}
+    decoder:
+      in_size: ??
+data:
+  config:
+    sampling_strategy: ${tests.sampling_type}
+
+
+hydra:
+  sweeper:
+    params:
+      tests.scene_file: ${tests.scene_files}
+
+
+tags: ["testing"]
+
+seed: ${tests.seed}
