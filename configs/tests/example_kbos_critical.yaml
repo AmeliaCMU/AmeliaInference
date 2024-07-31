@@ -1,0 +1,18 @@
+defaults:
+  - default.yaml
+
+
+airport: 'kbos'
+
+scene_files: KBOS_26_1672621200,KBOS_23_1672610400
+ckpt_path: 'datasets/amelia/checkpoints/Single-Airport/kbos_/kbos_critical.ckpt'
+# Model/Data settings
+sampling_type: critical
+
+use_map : True
+
+# Testing options
+plot: True
+max_scenes: 20
+from_pickle: False
+report_inference_time: False
