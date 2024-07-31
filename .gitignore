@@ -4,7 +4,8 @@ out/
 output
 
 configs/tests
-!configs/tests/example.yaml
+!configs/tests/example_kbos_critical.yaml
+!configs/tests/example_kbos_random.yaml
 !configs/tests/default.yaml
 
 

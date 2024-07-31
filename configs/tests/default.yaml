@@ -3,6 +3,7 @@
 seed: 42
 # Data path config
 task: ${tests.airport}
+tag: ${tests.sampling_type}_ego
 out_data_dir: ./output
 
 
