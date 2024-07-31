@@ -3,7 +3,7 @@ out
 out/
 output
 
-# configs/tests
+configs/tests
 !configs/tests/example.yaml
 !configs/tests/default.yaml
 
