@@ -62,6 +62,10 @@ Where:
 
 ## BibTeX
 
+Our paper:
+
+**Amelia: A Large Dataset and Model for Airport Surface Movement Forecasting [[paper](https://arxiv.org/pdf/2407.21185)]**
+
 If you find our work useful in your research, please cite us!
 
 ```bibtex
