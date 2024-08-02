@@ -1,0 +1,13 @@
+
+root_dir: ${oc.env:PROJECT_ROOT}
+
+# in_test_dir: configs/tests
+# in_data_file: ${paths.in_test_dir}/default.yaml
+
+
+base_dir: ./datasets/amelia
+traj_data_version: a10v08
+in_data_dir: "${paths.base_dir}/traj_data_${paths.traj_data_version}/raw_trajectories"
+out_data_dir: "${paths.base_dir}/traj_data_${paths.traj_data_version}/inference"
+context_dir: "${paths.base_dir}/graph_data_a10v01os"
+assets_dir: "${paths.base_dir}/assets"
