@@ -14,4 +14,4 @@ class AgentType(Enum):
 
 DATA_DIR = "./datasets/amelia"
 VERSION = "a10v08"
-TRAJ_DATA_DIR = f"{DATA_DIR}/traj_data_{VERSION}/proc_full_trajectories"  # Trajectory from which to load scenes
+TRAJ_DATA_DIR = f"{DATA_DIR}/traj_data_{VERSION}/proc_full_scenes"  # Trajectory from which to load scenes
