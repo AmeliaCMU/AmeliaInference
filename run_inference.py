@@ -1,16 +1,12 @@
 import os
 import torch
-# import yaml
-import argparse
 import random
 import numpy as np
 from tqdm import tqdm
 
 import hydra
-from omegaconf import DictConfig, OmegaConf
-from easydict import EasyDict
+from omegaconf import DictConfig
 
-# from easydict import EasyDict
 from standalone import SocialTrajPred
 from src.utils.utils import plot_scene_batch
 from src.data.components.amelia_dataset import AmeliaDataset
@@ -18,8 +14,6 @@ from src.models.components.amelia import AmeliaTF  # Context aware model
 from src.models.components.amelia_traj import AmeliaTraj  # Non context aware model
 from geographiclib.geodesic import Geodesic
 
-
-from amelia_inference.utils.config_utils import get_config_dict, get_model_config, get_data_config, setup_logger
 from amelia_inference.utils.data_utils import get_scene_list, get_full_scene_batch
 from amelia_inference.utils.common import *
 
@@ -90,8 +84,9 @@ def main(cfg: DictConfig) -> None:
                                              traj_dir=TRAJ_DATA_DIR,
                                              max_scenes=cfg.tests.max_scenes,
                                              sorted=False)
-
+    print(scenes)
     print("----- Forwarding scenes -----")
+
     for scene in tqdm(scenes):
         batch, predictions = predictor.forward(scene)
         if plot:
