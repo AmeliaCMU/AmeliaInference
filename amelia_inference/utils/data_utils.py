@@ -43,7 +43,7 @@ def pad_array(array, padding, dim=1, device="cuda"):
 
 
 def get_full_scene_batch(batch, scene_dict, predictions):
-    sequences = scene_dict['sequences']
+    sequences = scene_dict['agent_sequences']
     agent_types = np.array(scene_dict['agent_types'])
 
     agents_in_scene = batch['scene_dict']['agents_in_scene'].detach(
