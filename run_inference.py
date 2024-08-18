@@ -81,7 +81,7 @@ def main(cfg: DictConfig) -> None:
         os.makedirs(out_dir)
 
     scene_file_list, scenes = get_scene_list(cfg.tests.scene_file, cfg.tests.airport,
-                                             traj_dir=TRAJ_DATA_DIR,
+                                             traj_dir=cfg.data.config.traj_dir,
                                              max_scenes=cfg.tests.max_scenes,
                                              sorted=False)
     print(scenes)

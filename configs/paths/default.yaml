@@ -8,6 +8,7 @@ root_dir: ${oc.env:PROJECT_ROOT}
 base_dir: ./datasets/amelia
 traj_data_version: a10v08
 in_data_dir: "${paths.base_dir}/traj_data_${paths.traj_data_version}/raw_trajectories"
-out_data_dir: "${paths.base_dir}/traj_data_${paths.traj_data_version}/inference"
+traj_data_dir: "${paths.base_dir}/traj_data_${paths.traj_data_version}/proc_full_scenes"
+out_data_dir: "./output"
 context_dir: "${paths.base_dir}/graph_data_a10v01os"
 assets_dir: "${paths.base_dir}/assets"
