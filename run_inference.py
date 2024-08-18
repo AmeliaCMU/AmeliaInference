@@ -84,8 +84,9 @@ def main(cfg: DictConfig) -> None:
                                              traj_dir=TRAJ_DATA_DIR,
                                              max_scenes=cfg.tests.max_scenes,
                                              sorted=False)
-
+    print(scenes)
     print("----- Forwarding scenes -----")
+
     for scene in tqdm(scenes):
         batch, predictions = predictor.forward(scene)
         if plot:

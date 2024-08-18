@@ -6,7 +6,6 @@ import numpy as np
 import pickle as pkl
 from typing import Tuple
 from easydict import EasyDict
-from easydict import EasyDict
 from src.data.components.amelia_dataset import AmeliaDataset
 # from src.models.components.amelia import AmeliaTF  # Context aware model
 # from src.models.components.amelia_traj import AmeliaTraj  # Non context aware model
@@ -44,7 +43,6 @@ class SocialTrajPred():
         self.dataloader.scenario_list = {}
         self.dataloader.hold_lines = {}
         self.dataloader.data_files = []
-        print(os.path.exists(self.dataloader.context_dir), self.dataloader.context_dir, os.getcwd())
 
         graph_file = os.path.join(self.dataloader.context_dir, self.airport, 'semantic_graph.pkl')
         with open(graph_file, 'rb') as f:
@@ -86,7 +84,7 @@ class SocialTrajPred():
         self.model.load_state_dict(state_dict)
 
     def forward(self, scene_data, random_ego=False) -> Tuple[torch.tensor, torch.tensor, torch.tensor]:
-        # Transfrom scene in local frame
+        # Transform scene in local frame
         transformed_scene = self.dataloader.transform_scene_data(scene_data, random_ego=random_ego)
         transformed_scene = self.dataloader.collate_batch([transformed_scene])
         # Prepare inputs
