@@ -62,7 +62,6 @@ class SocialTrajPred():
             self.dataloader.ref_data[self.airport].espg_4326.east,
             self.dataloader.ref_data[self.airport].espg_4326.south,
             self.dataloader.ref_data[self.airport].espg_4326.west
-
         )
 
     def dict_to_tensor(self, dict):
@@ -74,7 +73,8 @@ class SocialTrajPred():
 
     def load_ckpt(self, ckpt_path: str, from_pickle: bool = False):
         """
-        Converts pytorch lightning state dict to torch state dict by removing net. prefix and load this to the GPT module.
+        Converts pytorch lightning state dict to torch state dict by removing net. 
+        prefix and load this to the GPT module.
         """
         if (from_pickle):
             with open(ckpt_path, 'rb') as file:
