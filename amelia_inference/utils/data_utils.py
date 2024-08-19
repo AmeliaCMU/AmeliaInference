@@ -42,7 +42,7 @@ def pad_array(array, padding, dim=1, device="cuda"):
     return padded_array
 
 
-def get_full_scene_batch(batch, scene_dict, predictions):
+def get_full_scene_batch(batch, scene_dict, predictions, device):
     sequences = scene_dict['agent_sequences']
     agent_types = np.array(scene_dict['agent_types'])
 
@@ -65,9 +65,9 @@ def get_full_scene_batch(batch, scene_dict, predictions):
     B, K, d = pred_scores.shape
 
     if N > K:
-        pred_scores = pad_array(pred_scores, padding=N-K, dim=1, device='cpu')
-        mu = pad_array(mu, padding=N - K, dim=1, device='cpu')
-        sigma = pad_array(sigma, padding=N - K, dim=1, device='cpu')
+        pred_scores = pad_array(pred_scores, padding=N-K, dim=1, device=device)
+        mu = pad_array(mu, padding=N - K, dim=1, device=device)
+        sigma = pad_array(sigma, padding=N - K, dim=1, device=device)
 
     agent_indexes = np.arange(0, K)
     batch['scene_dict']['sequences'] = torch.from_numpy(all_agents)

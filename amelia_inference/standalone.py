@@ -16,7 +16,7 @@ import src.utils.global_masks as G
 
 class SocialTrajPred():
     def __init__(self, airport: str, model, dataloader: AmeliaDataset,
-                 use_map: bool = True, device: str = 'cpu'):
+                 use_map: bool = True, device: torch.device = torch.device('cuda')):
 
         # Create output directory
         self.airport = airport
@@ -29,9 +29,8 @@ class SocialTrajPred():
         # Configure CUDA
         torch.set_printoptions(precision=10, threshold=None, edgeitems=None,
                                linewidth=None, profile=None, sci_mode=False)
-
-        self.device = torch.device(device)
-        self.model.to(device)
+        self.device = device
+        # self.model.to(self.device)
 
     def load_assets(self):
         # Init attributes
@@ -78,7 +77,7 @@ class SocialTrajPred():
             with open(ckpt_path, 'rb') as file:
                 state_dict = pkl.load(file)
         else:
-            checkpoint = torch.load(ckpt_path,  map_location=self.device)
+            checkpoint = torch.load(ckpt_path,  map_location=self.device, weights_only=False)
             state_dict = checkpoint['state_dict']
             state_dict = {k.partition('net.')[2]: v for k, v in state_dict.items()}
         self.model.load_state_dict(state_dict)
@@ -86,18 +85,18 @@ class SocialTrajPred():
     def forward(self, scene_data, benchmark: bool = True, random_ego=False) -> Tuple[torch.tensor, torch.tensor, torch.tensor]:
         # NOTE: quick workaround. Need to fix later
         # Transform scene in local frame
-        if scene_data['benchmark'] is None:
+        if 'benchmark' not in scene_data or scene_data['benchmark'] is None:
             transformed_scene = self.dataloader.transform_scene_data(scene_data, random_ego=random_ego)
             transformed_scene = self.dataloader.collate_batch([transformed_scene])
         else:
             benchmark = scene_data['benchmark']
-        
+
             agent_ids = np.asarray(scene_data['agent_ids'])
             bench_agents = [bid for bid in benchmark['bench_agents'] if bid in agent_ids]
             agents_in_scene = np.asarray([np.where(agent_ids == bid)[0][0] for bid in bench_agents])
             if len(agents_in_scene) <= 1:
                 return None, None
-            
+
             transformed_scene = []
             for i in range(len(agents_in_scene)):
                 tf_scene = self.dataloader.transform_scene_data_bench(
@@ -117,6 +116,7 @@ class SocialTrajPred():
         masks = transformed_scene['scene_dict']['agent_masks'].to(device=self.device)
 
         # Forward and return results
+        self.model.to(self.device)
         self.model.eval()
         pred_scores, mu, sigma = self.model.forward(X, context=context, adjacency=adjacency)
         pred_scores, mu, sigma = pred_scores.detach(), mu.detach(), sigma.detach()
