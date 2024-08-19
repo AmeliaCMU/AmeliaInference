@@ -7,7 +7,7 @@ from tqdm import tqdm
 import hydra
 from omegaconf import DictConfig
 
-from standalone import SocialTrajPred
+from amelia_inference.standalone import SocialTrajPred
 from src.utils.utils import plot_scene_batch
 from src.data.components.amelia_dataset import AmeliaDataset
 from src.models.components.amelia import AmeliaTF  # Context aware model
@@ -98,7 +98,7 @@ def main(cfg: DictConfig) -> None:
                 hist_len=model.hist_len,
                 geodesic=Geodesic.WGS84,
                 tag=vis_tag,
-                plot_full_scene=True,
+                plot_full_scene=False,
                 out_dir=out_dir
             )
 

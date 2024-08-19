@@ -4,7 +4,7 @@ import json
 import torch
 import numpy as np
 import pickle as pkl
-from typing import Tuple
+from typing import Tuple, Dict
 from easydict import EasyDict
 from src.data.components.amelia_dataset import AmeliaDataset
 # from src.models.components.amelia import AmeliaTF  # Context aware model
@@ -83,10 +83,28 @@ class SocialTrajPred():
             state_dict = {k.partition('net.')[2]: v for k, v in state_dict.items()}
         self.model.load_state_dict(state_dict)
 
-    def forward(self, scene_data, random_ego=False) -> Tuple[torch.tensor, torch.tensor, torch.tensor]:
+    def forward(self, scene_data, benchmark: bool = True, random_ego=False) -> Tuple[torch.tensor, torch.tensor, torch.tensor]:
+        # NOTE: quick workaround. Need to fix later
         # Transform scene in local frame
-        transformed_scene = self.dataloader.transform_scene_data(scene_data, random_ego=random_ego)
-        transformed_scene = self.dataloader.collate_batch([transformed_scene])
+        if scene_data['benchmark'] is None:
+            transformed_scene = self.dataloader.transform_scene_data(scene_data, random_ego=random_ego)
+            transformed_scene = self.dataloader.collate_batch([transformed_scene])
+        else:
+            benchmark = scene_data['benchmark']
+        
+            agent_ids = np.asarray(scene_data['agent_ids'])
+            bench_agents = [bid for bid in benchmark['bench_agents'] if bid in agent_ids]
+            agents_in_scene = np.asarray([np.where(agent_ids == bid)[0][0] for bid in bench_agents])
+            if len(agents_in_scene) <= 1:
+                return None, None
+            
+            transformed_scene = []
+            for i in range(len(agents_in_scene)):
+                tf_scene = self.dataloader.transform_scene_data_bench(
+                    scene_data, agents_in_scene, ego_agent=i)
+                transformed_scene.append(tf_scene)
+            transformed_scene = self.dataloader.collate_batch(transformed_scene)
+
         # Prepare inputs
         Y = transformed_scene['scene_dict']['rel_sequences'].to(device=self.device)
         X = torch.zeros_like(Y).type(torch.float).to(device=self.device)
@@ -100,7 +118,6 @@ class SocialTrajPred():
 
         # Forward and return results
         self.model.eval()
-        pred_scores, mu, sigma = self.model.forward(
-            X, context=context, adjacency=adjacency, mask=None,)
+        pred_scores, mu, sigma = self.model.forward(X, context=context, adjacency=adjacency)
         pred_scores, mu, sigma = pred_scores.detach(), mu.detach(), sigma.detach()
         return transformed_scene, (pred_scores, mu, sigma)

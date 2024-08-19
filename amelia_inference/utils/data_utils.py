@@ -46,8 +46,7 @@ def get_full_scene_batch(batch, scene_dict, predictions):
     sequences = scene_dict['agent_sequences']
     agent_types = np.array(scene_dict['agent_types'])
 
-    agents_in_scene = batch['scene_dict']['agents_in_scene'].detach(
-    ).cpu().numpy().astype(int).tolist()
+    agents_in_scene = batch['scene_dict']['agents_in_scene'].detach().cpu().numpy().astype(int).tolist()
     other_agents = [i for i in range(scene_dict['num_agents']) if i not in agents_in_scene]
 
     # Separate agents in scene from unused agents
