@@ -86,6 +86,7 @@ def main(cfg: DictConfig) -> None:
                                              max_scenes=cfg.tests.max_scenes,
                                              sorted=False)
     print("----- Forwarding scenes -----")
+
     for scene in tqdm(scenes):
         batch, predictions = predictor.forward(scene)
         if plot:

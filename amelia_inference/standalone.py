@@ -90,13 +90,11 @@ class SocialTrajPred():
             transformed_scene = self.dataloader.collate_batch([transformed_scene])
         else:
             benchmark = scene_data['benchmark']
-
             agent_ids = np.asarray(scene_data['agent_ids'])
             bench_agents = [bid for bid in benchmark['bench_agents'] if bid in agent_ids]
             agents_in_scene = np.asarray([np.where(agent_ids == bid)[0][0] for bid in bench_agents])
             if len(agents_in_scene) <= 1:
                 return None, None
-
             transformed_scene = []
             for i in range(len(agents_in_scene)):
                 tf_scene = self.dataloader.transform_scene_data_bench(
