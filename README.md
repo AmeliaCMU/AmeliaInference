@@ -80,6 +80,7 @@ output
     |-- .hydra
     |-- kbos_scene_*.png
 ```
+
 where:
 
 - `KBOS_26_1672610400_critical_ego` and `KBOS_26_1672621200_critical_ego` are the directories with the specifications configured in the `example_kbos_critical.yaml` file.

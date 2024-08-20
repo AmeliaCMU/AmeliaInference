@@ -69,9 +69,10 @@ def main(cfg: DictConfig) -> None:
     from_pickle = cfg.tests.from_pickle
     plot = cfg.tests.plot
 
+    device = torch.device(cfg.device.accelerator)
     # Load models
     predictor = SocialTrajPred(cfg.tests.airport, model=model, dataloader=dataloader,
-                               use_map=cfg.tests.use_map)
+                               use_map=cfg.tests.use_map, device=device)
     predictor.load_ckpt(cfg.tests.ckpt_path, from_pickle)
 
     print(f"----- Loading scenes for {cfg.tests.scene_file} -----")
@@ -84,13 +85,12 @@ def main(cfg: DictConfig) -> None:
                                              traj_dir=TRAJ_DATA_DIR,
                                              max_scenes=cfg.tests.max_scenes,
                                              sorted=False)
-    print(scenes)
     print("----- Forwarding scenes -----")
 
     for scene in tqdm(scenes):
         batch, predictions = predictor.forward(scene)
         if plot:
-            full_scene, preds = get_full_scene_batch(batch, scene, predictions)
+            full_scene, preds = get_full_scene_batch(batch, scene, predictions, device)
             plot_scene_batch(
                 asset_dir=cfg.data.config.assets_dir,
                 batch=full_scene,

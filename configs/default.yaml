@@ -4,6 +4,7 @@ defaults:
   - paths: default.yaml
   - tests: default.yaml
   - hydra: default.yaml
+  - device: gpu.yaml
   - _self_
 
 
