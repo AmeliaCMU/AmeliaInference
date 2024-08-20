@@ -98,7 +98,7 @@ def main(cfg: DictConfig) -> None:
                 hist_len=model.hist_len,
                 geodesic=Geodesic.WGS84,
                 tag=vis_tag,
-                plot_full_scene=False,
+                plot_full_scene=True,
                 out_dir=out_dir
             )
 
