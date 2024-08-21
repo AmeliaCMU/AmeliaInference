@@ -2,10 +2,10 @@
 
 # enable color logging
 defaults:
-  - override hydra_logging: colorlog
-  - override job_logging: colorlog
+  - override hydra_logging: disabled
+  - override job_logging: disabled
 
-
+# disabled changes the current working directory to the output directory for each job
 job:
   chdir: False
 # output directory, generated dynamically on each run

@@ -8,9 +8,6 @@ defaults:
   - _self_
 
 
-paths:
-  out_data_dir: ./output
-
 model:
   config:
     encoder:
