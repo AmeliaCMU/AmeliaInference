@@ -89,6 +89,7 @@ def main(cfg: DictConfig) -> None:
 
     for scene in tqdm(scenes):
         batch, predictions = predictor.forward(scene)
+        
         if plot:
             full_scene, preds = get_full_scene_batch(batch, scene, predictions, device)
             plot_scene_batch(
