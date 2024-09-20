@@ -20,7 +20,7 @@ dependencies = [
     'contextily==1.3.0',
     'easydict==1.10',
     'opencv-python==4.7.0.72',
-    'amelia_tf @ git+https://github.com/AmeliaCMU/AmeliaTF.git@main',
+
 ]
 
 authors = [
@@ -29,6 +29,11 @@ authors = [
     {name = "Jay Patrikar"},
     {name = "Haichuan Wang"},
     {name = "Jong Hoon Park"},
+]
+
+[project.optional-dependencies]
+amelia_tf = [
+    'amelia_tf @ git+https://github.com/AmeliaCMU/AmeliaTF.git@main',
 ]
 
 [tool.setuptools]
