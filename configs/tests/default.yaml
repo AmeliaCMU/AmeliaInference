@@ -15,7 +15,22 @@ sampling_type: ??
 use_map : ??
 
 # Testing options
-plot: ??
-max_scenes: ??
-from_pickle: ??
-report_inference_time: ??
+plot: True
+# plotting all agents
+plot_all: True
+
+# scene_type from scene_types
+scene_type: marginal_pred
+max_scenes: 20
+from_pickle: False
+report_inference_time: False
+
+scene_option:
+  # scene_type: marginal_pred
+  marginal_pred:
+  # scene_type: benchmark
+  benchmark:
+    agents: []
+
+  collision:
+    threshold: 0.02

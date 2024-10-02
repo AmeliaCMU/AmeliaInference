@@ -48,3 +48,6 @@ hydra:
 tags: ["testing"]
 
 seed: ${tests.seed}
+
+
+scene_types: [simple, benchmark, benchmark_pred, marginal_pred]

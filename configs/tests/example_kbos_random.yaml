@@ -14,6 +14,23 @@ use_map : True
 
 # Testing options
 plot: True
-max_scenes: 20
+# plotting all agents
+plot_all: True
+
 from_pickle: False
 report_inference_time: False
+
+# scene_type from scene_types
+scene_type: marginal_pred
+max_scenes: 20
+
+
+
+scene_option:
+  # scene_type: marginal_pred
+  marginal_pred:
+  # scene_type: benchmark
+  benchmark:
+    agents: []
+
+  collision:

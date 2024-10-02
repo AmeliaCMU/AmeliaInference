@@ -4,15 +4,36 @@ defaults:
 
 airport: 'kbos'
 
-scene_files: KBOS_685_1675040400
-ckpt_path: 'datasets/amelia/checkpoints/Single-Airport/kbos_/kbos_critical.ckpt'
+scene_files: KBOS_26_1672621200
+ckpt_path: 'datasets/amelia/checkpoints/Single-Airport/kbos_v1/kbos.ckpt'
 # Model/Data settings
 sampling_type: critical
 
 use_map : True
 
 # Testing options
-plot: False
-max_scenes: 20
+plot: True
+# plotting all agents
+plot_all: True
+
+scene_type: marginal_pred
+
 from_pickle: False
 report_inference_time: False
+
+
+# scene_type from scene_types
+scene_type: marginal_pred
+max_scenes: 20
+# from_pickle: ??
+# report_inference_time: ??
+
+scene_option:
+  # scene_type: marginal_pred
+  marginal_pred:
+
+  # scene_type: benchmark
+  benchmark:
+    agents: []
+
+  collision:
