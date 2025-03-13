@@ -6,12 +6,14 @@ import numpy as np
 import pickle as pkl
 from typing import Tuple, Dict
 from easydict import EasyDict
-from src.data.components.amelia_dataset import AmeliaDataset
-# from src.models.components.amelia import AmeliaTF  # Context aware model
-# from src.models.components.amelia_traj import AmeliaTraj  # Non context aware model
-import src.utils.global_masks as G
-# from geographiclib.geodesic import Geodesic
-# from mpl_toolkits.mplot3d import Axes3D  # <--- This is important for 3d plotting
+try:
+    from amelia_tf.data.components.amelia_dataset import AmeliaDataset
+    import amelia_tf.utils.global_masks as G
+except ImportError:
+    from src.data.components.amelia_dataset import AmeliaDataset
+    # from src.models.components.amelia import AmeliaTF  # Context aware model
+    # from src.models.components.amelia_traj import AmeliaTraj  # Non context aware model
+    import src.utils.global_masks as G
 
 
 class SocialTrajPred():
