@@ -8,14 +8,25 @@ import hydra
 from omegaconf import DictConfig
 
 from amelia_inference.standalone import SocialTrajPred
-from src.utils.utils import plot_scene_batch
-from src.data.components.amelia_dataset import AmeliaDataset
-from src.models.components.amelia import AmeliaTF  # Context aware model
-from src.models.components.amelia_traj import AmeliaTraj  # Non context aware model
+try:
+    from amelia_tf.utils.utils import plot_scene_batch
+    from amelia_tf.data.components.amelia_dataset import AmeliaDataset
+    from amelia_tf.models.components.amelia import AmeliaTF  # Context aware model
+    from amelia_tf.models.components.amelia_traj import AmeliaTraj  # Non context aware model
+    from amelia_scenes.visualization.scene_viz import plot_scene
+except ImportError:
+    from src.utils.utils import plot_scene_batch
+    from src.data.components.amelia_dataset import AmeliaDataset
+    from src.models.components.amelia import AmeliaTF
 from geographiclib.geodesic import Geodesic
 
 from amelia_inference.utils.data_utils import get_scene_list, get_full_scene_batch
 from amelia_inference.utils.common import *
+
+from amelia_scenes.visualization import common as cviz
+from amelia_scenes.visualization import scene_viz as viz
+from amelia_scenes.utils.dataset import load_assets
+
 
 # Load model and checkpoint
 
