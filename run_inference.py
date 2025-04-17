@@ -99,7 +99,8 @@ def main(cfg: DictConfig) -> None:
     print("----- Forwarding scenes -----")
 
     for scene in tqdm(scenes):
-        batch, predictions = predictor.forward(scene)
+        batch, predictions = predictor.forward(
+            scene, random_ego=cfg.tests.random_ego, ego_agent_id=cfg.tests.ego_agent_id)
         if plot:
             full_scene, preds = get_full_scene_batch(batch, scene, predictions, device)
             plot_scene_batch(

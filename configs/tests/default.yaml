@@ -19,3 +19,6 @@ plot: ??
 max_scenes: ??
 from_pickle: ??
 report_inference_time: ??
+
+ego_agent_id: 0
+random_ego: True
