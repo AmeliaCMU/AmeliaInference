@@ -84,11 +84,12 @@ class SocialTrajPred():
             state_dict = {k.partition('net.')[2]: v for k, v in state_dict.items()}
         self.model.load_state_dict(state_dict)
 
-    def forward(self, scene_data, benchmark: bool = True, random_ego=False) -> Tuple[torch.tensor, torch.tensor, torch.tensor]:
+    def forward(self, scene_data, benchmark: bool = True, random_ego=False, ego_agent_id: int = 0) -> Tuple[torch.tensor, torch.tensor, torch.tensor]:
         # NOTE: quick workaround. Need to fix later
         # Transform scene in local frame
         if 'benchmark' not in scene_data or scene_data['benchmark'] is None:
-            transformed_scene = self.dataloader.transform_scene_data(scene_data, random_ego=random_ego)
+            transformed_scene = self.dataloader.transform_scene_data(
+                scene_data, random_ego=random_ego, ego_agent_id=ego_agent_id)
             transformed_scene = self.dataloader.collate_batch([transformed_scene])
         else:
             benchmark = scene_data['benchmark']
